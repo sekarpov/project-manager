@@ -1,5 +1,5 @@
 up: docker-up
-init: docker-down docker-pull docker-build docker-up
+init: docker-down docker-pull docker-build docker-up manager-init
 
 docker-up:
 	docker-compose up -d
@@ -13,8 +13,13 @@ docker-pull:
 docker-build:
 	docker-compose build
 
+manager-init: manager-composer-install
+
+manager-composer-install:
+	docker-compose run --rm manager-php-cli composer install
+
 cli:
-	docker-compose run -rm manager-php-cli php bin/app.php
+	docker-compose run --rm manager-php-cli php bin/app.php
 
 build-production:
 	docker build --pull --file=manager/docker/production/nginx.docker --tag ${REGISTRY_ADDRESS}/manager-nginx:${IMAGE_TAG} manager
