@@ -9,6 +9,7 @@ security:
             security: false
         main:
             anonymous: lazy
+            user_checker: App\Security\UserChecker
             provider: users_in_memory
             guard:
                 authenticators:
