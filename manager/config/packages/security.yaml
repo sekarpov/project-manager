@@ -2,7 +2,7 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         fetcher:
-            id: App\Security\UserPrvoider
+            id: App\Security\UserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -10,7 +10,6 @@ security:
         main:
             anonymous: lazy
             user_checker: App\Security\UserChecker
-            provider: users_in_memory
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
